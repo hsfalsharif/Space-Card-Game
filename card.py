@@ -1,9 +1,7 @@
 class Card:
     
-    def __init__(self, fuel, mass, desc, effect):
-        self.fuel = fuel
-        self.mass = mass
-        self.desc = desc
+    def __init__(self,name, effect):
+        self.name = name
         self.effect = effect
 
     def execute_effect(self):
