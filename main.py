@@ -1,5 +1,6 @@
 import deck
 import card
+import random
 
 number_of_igniter_card = 1
 number_of_fire_engine_card = 3
@@ -32,3 +33,6 @@ list_of_cards = [
     thruster_gimbel_card,
     electric_propulsion_card,
 ]
+
+new_object = random.choice(list_of_cards)
+print(new_object.name)
