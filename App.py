@@ -47,10 +47,11 @@ def main_menu():
     click = False
     at_menu = True
     DISPLAYSURF.fill(BLACK)
+    menu_bg = pygame.image.load('menu_bg.png')
+    DISPLAYSURF.blit(menu_bg, (0, 0))
     draw_text("Decks To Orbit!", font, WHITE, DISPLAYSURF, 420, 300)
     button_1 = pygame.Rect(475, 450, 200, 50)
     button_2 = pygame.Rect(475, 550, 200, 50)
-
     while at_menu:
         pygame.draw.rect(DISPLAYSURF, RED, button_1)
         draw_text("Play", font, WHITE, DISPLAYSURF, 530, 455)
@@ -88,30 +89,34 @@ def main_menu():
 def select_mission():
     click = False
     at_menu = True
-    DISPLAYSURF.fill(GREY)
+    #DISPLAYSURF = pygame.display.set_mode((529,904))
+    background = pygame.image.load('mission_select.png')
+    DISPLAYSURF.fill((21, 5, 66))
     draw_text("Select Mission", font, BLACK, DISPLAYSURF, 420, 300)
-    button_1 = pygame.Rect(325, 500, 200, 50)
-    button_2 = pygame.Rect(625, 500, 200, 50)
+    mission_1 = pygame.Rect(157, 117, 366, 625)
+    #button_2 = pygame.Rect(625, 500, 200, 50)
 
     while at_menu:
-        pygame.draw.rect(DISPLAYSURF, WHITE, button_1)
-        draw_text("Moon", font, BLACK, DISPLAYSURF, 370, 505)
-        pygame.draw.rect(DISPLAYSURF, WHITE, button_2)
-        draw_text("Mars", font, BLACK, DISPLAYSURF, 670, 505)
+        DISPLAYSURF.fill((21, 5, 66))
+        DISPLAYSURF.blit(background, (0, 0))
+        #pygame.draw.rect(DISPLAYSURF, WHITE, button_1)
+        #draw_text("Moon", font, BLACK, DISPLAYSURF, 370, 505)
+        #pygame.draw.rect(DISPLAYSURF, WHITE, button_2)
+        #draw_text("Mars", font, BLACK, DISPLAYSURF, 670, 505)
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        if button_1.collidepoint((mouse_x, mouse_y)):
-            pygame.draw.rect(DISPLAYSURF, BLUE, button_1)
-            draw_text("Moon", font, WHITE, DISPLAYSURF, 370, 505)
+        if mission_1.collidepoint((mouse_x, mouse_y)):
+            #pygame.draw.rect(DISPLAYSURF, BLUE, button_1)
+            #draw_text("Moon", font, WHITE, DISPLAYSURF, 370, 505)
             if click:
                 at_menu = False
 
-        if button_2.collidepoint((mouse_x, mouse_y)):
-            pygame.draw.rect(DISPLAYSURF, BLUE, button_2)
-            draw_text("Mars", font, WHITE, DISPLAYSURF, 670, 505)
-            if click:
-                pygame.quit()
-                sys.exit()
+        #if button_2.collidepoint((mouse_x, mouse_y)):
+        #    pygame.draw.rect(DISPLAYSURF, BLUE, button_2)
+        #    draw_text("Mars", font, WHITE, DISPLAYSURF, 670, 505)
+        #    if click:
+        #        pygame.quit()
+        #        sys.exit()
         click = False
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -130,6 +135,8 @@ def select_mission():
 def deck_building():
     click = False
     DISPLAYSURF.fill(DARKBLUE)
+    menu_bg = pygame.image.load('menu_bg.png')
+    DISPLAYSURF.blit(menu_bg, (0, 0))
     draw_text("Build Deck", font, REDDISH, DISPLAYSURF, 475, 200)
     deck_building = True
     card_1 = pygame.Rect(190, 300, 175, 300)
@@ -196,21 +203,36 @@ def game_loop():
     click = False
     running = True
     DISPLAYSURF.fill(BLACK)
-    card_deck = pygame.Rect(30, 475, 175, 300)
+    card_deck = pygame.Rect(30, 100, 125, 200)
     for i in range(100):
-        pygame.draw.circle(DISPLAYSURF, GREY, (random.randint(1,1200), random.randint(1,800)), 2)
+        pygame.draw.circle(DISPLAYSURF, WHITE, (random.randint(1,1200), random.randint(1,800)), 2)
     pygame.draw.circle(DISPLAYSURF, GREY, (600, 100), 50)
     pygame.draw.rect(DISPLAYSURF, DARKBLUE, card_deck)
-    draw_text("Deck", font, REDDISH, DISPLAYSURF, 65, 600)
-
+    draw_text("Deck", font, REDDISH, DISPLAYSURF, 43, 182)
+    decoupler = pygame.image.load('decoupler.png')
+    elec_propul = pygame.image.load('electric_propulsion.png')
+    igniter = pygame.image.load('igniter.png')
+    airbags = pygame.image.load('airbags.png')
+    ring_laser_gyro = pygame.image.load('ring_laser_gyro.png')
+    DISPLAYSURF.blit(decoupler, (35, 450))
+    DISPLAYSURF.blit(elec_propul, (265, 450))
+    DISPLAYSURF.blit(igniter, (495, 450))
+    DISPLAYSURF.blit(airbags, (725, 450))
+    DISPLAYSURF.blit(ring_laser_gyro, (955, 450))
     while running:
         if click:
             DISPLAYSURF.fill(BLACK)
             for i in range(100):
-                pygame.draw.circle(DISPLAYSURF, GREY, (random.randint(1,1200), random.randint(1,800)), 2)
+                pygame.draw.circle(DISPLAYSURF, WHITE, (random.randint(1,1200), random.randint(1,800)), 2)
             pygame.draw.circle(DISPLAYSURF, GREY, (600, 100), 50)
             pygame.draw.rect(DISPLAYSURF, DARKBLUE, card_deck)
-            draw_text("Deck", font, REDDISH, DISPLAYSURF, 65, 600)
+            draw_text("Deck", font, REDDISH, DISPLAYSURF, 43, 182)
+
+            DISPLAYSURF.blit(decoupler, (35, 450))
+            DISPLAYSURF.blit(elec_propul, (265, 450))
+            DISPLAYSURF.blit(igniter, (495, 450))
+            DISPLAYSURF.blit(airbags, (725, 450))
+            DISPLAYSURF.blit(ring_laser_gyro, (955, 450))
         click = False
         for event in pygame.event.get():
             if event.type == QUIT:
